@@ -1,25 +1,13 @@
 using System.Collections.ObjectModel;
-using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiToDoList.Models;
+using MauiToDoList.Pages;
 
 namespace MauiToDoList.ViewModels;
 
-public class ToDoListViewModel
+public partial class ToDoListViewModel : ObservableObject
 {
-    public ToDoListViewModel()
-    {
-        AddItemCommand = new Command(() =>
-        {
-            ToDoItems.Add(new ToDoItem { Title = "New Title", SubTitle = "New Subtitle" });
-        });
-
-        DeleteItemCommand = new Command(toDoItem =>
-        {
-            if (toDoItem is ToDoItem item)
-                ToDoItems.Remove(item);
-        });
-    }
-
     public ObservableCollection<ToDoItem> ToDoItems { get; set; } =
     [
         new() { Title = "Buy some milk", SubTitle = "2%" },
@@ -34,6 +22,24 @@ public class ToDoListViewModel
         new() { Title = "Sleep", SubTitle = "Before 12am" }
     ];
 
-    public ICommand AddItemCommand { private set; get; }
-    public ICommand DeleteItemCommand { private set; get; }
+    [RelayCommand]
+    private void AddItem()
+    {
+        ToDoItems.Add(new ToDoItem { Title = "New Title", SubTitle = "New Subtitle" });
+    }
+
+    [RelayCommand]
+    private void DeleteItem(ToDoItem toDoItem)
+    {
+        ToDoItems.Remove(toDoItem);
+    }
+
+    [RelayCommand]
+    private async Task TapItem(ToDoItem toDoItem)
+    {
+        await Shell.Current.GoToAsync(nameof(ToDoDetail), new Dictionary<string, object>
+        {
+            { "Item", toDoItem }
+        });
+    }
 }

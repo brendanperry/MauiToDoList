@@ -6,17 +6,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MauiToDoList"
     xmlns:pages="clr-namespace:MauiToDoList.Pages"
-    Shell.FlyoutBehavior="Flyout"
     Title="MauiToDoList">
+    <TabBar>
+        <Tab>
+            <ShellContent
+                Title="Home"
+                ContentTemplate="{DataTemplate local:MainPage}"
+                Route="MainPage" />
+        </Tab>
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-
-    <ShellContent
-        Title="To Do List"
-        ContentTemplate="{DataTemplate pages:ToDoList}"
-        Route="ToDoList" />
-
+        <Tab>
+            <ShellContent
+                Title="To Do List"
+                ContentTemplate="{DataTemplate pages:ToDoList}"
+                Route="ToDoList" />
+        </Tab>
+    </TabBar>
 </Shell>

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using MauiToDoList.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace MauiToDoList;
 
@@ -18,6 +19,9 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
+
+        builder.Services.AddTransient<ToDoDetailViewModel>();
+        builder.Services.AddTransient<ToDoListViewModel>();
 
         return builder.Build();
     }

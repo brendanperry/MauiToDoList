@@ -8,7 +8,6 @@ public class ToDoItem
 
 /*
  * For next time:
- * Get code in git repo
  * Work on editing a todo item itself (title and subtitle)
  * After that, make interface for creating one
  * After that, save items to local storage

@@ -13,7 +13,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <CollectionView ItemsSource="{Binding ToDoItems}">
+            <CollectionView ItemsSource="{Binding ToDoItems}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:ToDoItem">
                         <SwipeView>
@@ -26,7 +26,12 @@
                                 </SwipeItems>
                             </SwipeView.RightItems>
 
+
                             <Grid Padding="10" BackgroundColor="White">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}"
+                                                          Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:ToDoListViewModel}}, Path=TapItemCommand}" />
+                                </Grid.GestureRecognizers>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />

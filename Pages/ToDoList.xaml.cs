@@ -7,6 +7,7 @@ public partial class ToDoList
     public ToDoList()
     {
         InitializeComponent();
+        
         BindingContext = new ToDoListViewModel();
     }
 }
